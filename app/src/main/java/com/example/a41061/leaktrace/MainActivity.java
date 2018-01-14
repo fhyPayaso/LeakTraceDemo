@@ -30,27 +30,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Handler mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 0:
-                        // do something
-                        break;
-                    case 1:
-                        // do something
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
+//        Handler mHandler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                switch (msg.what) {
+//                    case 0:
+//                        // do something
+//                        break;
+//                    case 1:
+//                        // do something
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        };
 
-
-        mHandler.sendEmptyMessage(0);
-        String asa;
-        context = this;
-        setButton();
+//
+//        mHandler.sendEmptyMessage(0);
+//        String asa;
+//        context = this;
+//        setButton();
     }
 
 
