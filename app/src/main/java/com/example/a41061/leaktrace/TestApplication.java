@@ -1,6 +1,9 @@
 package com.example.a41061.leaktrace;
 
 import android.app.Application;
+
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMOptions;
 import com.squareup.leakcanary.LeakCanary;
 
 
@@ -17,5 +20,16 @@ public class TestApplication extends Application{
     public void onCreate() {
         super.onCreate();
         LeakCanary.install(this);
+
+
+
+
+
+
+
+
+
+
+
     }
 }
