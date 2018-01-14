@@ -30,12 +30,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        Handler mHandler = new Handler() {
+//            @Override
+//            public void handleMessage(Message msg) {
+//                switch (msg.what) {
+//                    case 0:
+//                        // do something
+//                        break;
+//                    case 1:
+//                        // do something
+//                        break;
+//                    default:
+//                        break;
+//                }
+//            }
+//        };
 
+//
+//        mHandler.sendEmptyMessage(0);
+//        String asa;
+//        context = this;
+//        setButton();
     }
 
 
 
+    public void setButton() {
 
+        button = (Button) findViewById(R.id.btn_first);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, FirstActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
 
 
 }
