@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.chat.adapters.MessageAdapter;
 import com.example.a41061.leaktrace.until.Utility;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -41,11 +42,12 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-        setTitle("聊天");
+        setTitle("Chat");
 
 
         Bundle bundle = getIntent().getExtras();
         chatId = bundle.getString(FriendListActivity.USER_ID);
+
         //添加信息监听
         EMClient.getInstance().chatManager().addMessageListener(this);
         conversation = EMClient.getInstance().chatManager().getConversation(chatId,
@@ -112,4 +114,5 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
         editChatContent.setText("");
         refresh();
     }
+
 }

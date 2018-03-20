@@ -38,8 +38,6 @@ public class ContactListAdapter extends BaseRecyclerViewAdapter<String> {
 
         @BindView(R.id.txt_username)
         TextView txtUsername;
-        @BindView(R.id.message_number)
-        TextView messageNumber;
         EMConversation conversation;
         String userId;
 
@@ -51,28 +49,6 @@ public class ContactListAdapter extends BaseRecyclerViewAdapter<String> {
         protected void onBind(String s) {
             txtUsername.setText(s);
             userId = s;
-//            Utility.runOnNewThread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    conversation = EMClient.getInstance().chatManager().getConversation(userId, EMConversation
-//                            .EMConversationType.Chat,true);
-//                    Utility.runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            int unreadCount = conversation.getUnreadMsgCount();
-//                            if (unreadCount==0){
-//                                txtUnreadCount.setVisibility(View.GONE);
-//                            }else if (unreadCount>99){
-//                                txtUnreadCount.setText("99+");
-//                            }else {
-//                                txtUnreadCount.setText(unreadCount);
-//                            }
-//                        }
-//                    });
-//                }
-//            });
         }
-
-
     }
 }

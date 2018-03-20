@@ -23,7 +23,7 @@ public class AddFriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
         ButterKnife.bind(this);
-        setTitle("添加好友");
+        setTitle("AddFriends");
     }
 
 
@@ -38,7 +38,7 @@ public class AddFriendActivity extends AppCompatActivity {
 
         } catch (HyphenateException e) {
             e.printStackTrace();
-            ToastUtil.showToast(e.toString());
+            ToastUtil.showToast("添加失败"+e.toString());
         }
 
 

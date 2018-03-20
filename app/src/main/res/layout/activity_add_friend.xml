@@ -12,6 +12,7 @@
 
 
     <EditText
+        android:layout_margin="10dp"
         android:id="@+id/edit_search_name"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -24,7 +25,8 @@
         android:layout_height="wrap_content"
         android:text="添加"
         android:textColor="#FFFFFF"
-        android:background="@color/colorPrimary"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_btn_full"
         />
 
 </LinearLayout>

@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setTitle("ChatDemo");
         initView();
     }
 
@@ -45,9 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         findViewById(R.id.btn_register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 register();
-
             }
         });
 
@@ -70,15 +69,15 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     EMClient.getInstance().createAccount(editUsername.getText().toString().trim(), editPassword.getText()
                             .toString().trim());
-                    Log.i(TAG, "register: 注册成功");
+                    //Log.i(TAG, "register: 注册成功");
+                    ToastUtil.showToast("注册成功");
                 } catch (HyphenateException e) {
                     e.printStackTrace();
-                    Log.i(TAG, "register: 注册失败" + e.getErrorCode() + " , " + e.getMessage());
+                    //Log.i(TAG, "register: 注册失败" + e.getErrorCode() + " , " + e.getMessage());
+                    ToastUtil.showToast("注册失败" + e.getErrorCode() + " , " + e.getMessage());
                 }
             }
         }).start();
-
-
     }
 
     private void login() {
@@ -92,13 +91,15 @@ public class LoginActivity extends AppCompatActivity {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
                 startActivity(new Intent(LoginActivity.this, FriendListActivity.class));
-                Log.i(TAG, "onSuccess: 登录成功");
+                //Log.i(TAG, "onSuccess: 登录成功");
+                ToastUtil.showToast("登录成功");
             }
 
             @Override
             public void onError(int code, String error) {
 
-                Log.i(TAG, "onError: 登录失败，" + error);
+                //Log.i(TAG, "onError: 登录失败，" + error);
+                ToastUtil.showToast("登录失败" + error);
             }
 
             @Override
@@ -106,7 +107,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 
