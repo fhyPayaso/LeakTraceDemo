@@ -6,6 +6,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.chat.adapters.BaseRecyclerViewAdapter;
@@ -49,6 +51,16 @@ public class FriendListActivity extends AppCompatActivity implements BaseRecycle
         ButterKnife.bind(this);
         initView();
         initRec();
+
+
+        Button button = new Button(FriendListActivity.this);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

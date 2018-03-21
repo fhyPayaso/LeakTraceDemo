@@ -9,12 +9,14 @@ import android.widget.EditText;
 
 import com.example.a41061.leaktrace.MainActivity;
 import com.example.a41061.leaktrace.R;
+import com.example.a41061.leaktrace.until.AppNetWorkUtil;
 import com.example.a41061.leaktrace.until.ToastUtil;
 import com.example.a41061.leaktrace.until.Utility;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 import com.squareup.haha.perflib.Main;
+import com.squareup.haha.trove.THash;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,6 +58,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
+
+                //AppNetWorkUtil.getNetWorkState(LoginActivity.this);
+
+
             }
         });
     }
@@ -83,8 +89,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
 
-        EMClient.getInstance().login(editUsername.getText().toString().trim(), editPassword.getText().toString().trim
-                (), new EMCallBack() {
+        EMClient.getInstance().login("111111", "111111", new EMCallBack() {
             @Override
             public void onSuccess() {
 
@@ -106,8 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
 
