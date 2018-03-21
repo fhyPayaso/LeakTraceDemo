@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        setTitle("ChatDemo");
         initView();
     }
 
@@ -58,10 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 login();
-
-                //AppNetWorkUtil.getNetWorkState(LoginActivity.this);
-
-
             }
         });
     }
@@ -89,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void login() {
 
-        EMClient.getInstance().login("111111", "111111", new EMCallBack() {
+        EMClient.getInstance().login(editUsername.getText().toString().trim(), editPassword.getText().toString().trim
+                (), new EMCallBack() {
             @Override
             public void onSuccess() {
 
@@ -111,6 +109,8 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
 

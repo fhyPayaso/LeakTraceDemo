@@ -34,7 +34,7 @@ public class TestApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LeakCanary.install(this);
+
         instance = this;
         appContext = this;
         initEM();

@@ -31,10 +31,7 @@ import butterknife.OnClick;
 
 public class FriendListActivity extends AppCompatActivity implements BaseRecyclerViewAdapter.OnItemClicked<String> {
 
-    @BindView(R.id.fab_add_friend)
-    FloatingActionButton fabAddFriend;
-    @BindView(R.id.fab_sign_out)
-    FloatingActionButton fabSignOut;
+
     private List<String> userNames;
     private ContactListAdapter adapter;
     public static String USER_ID = "USER_ID";
@@ -98,8 +95,7 @@ public class FriendListActivity extends AppCompatActivity implements BaseRecycle
     private void initView() {
 
         setTitle("好友列表");
-        fabAddFriend.setTitle("添加好友");
-        fabSignOut.setTitle("退出登录");
+
         userNames = new ArrayList<>();
         initSwipe();
 
@@ -197,36 +193,6 @@ public class FriendListActivity extends AppCompatActivity implements BaseRecycle
 
     }
 
-    //添加好友点击事件
-    @OnClick(R.id.fab_add_friend)
-    public void onFabAddFriendClicked() {
-        startActivity(new Intent(FriendListActivity.this,AddFriendActivity.class));
-    }
-
-    //退出账户点击事件
-    @OnClick(R.id.fab_sign_out)
-    public void onFabSignOutClicked() {
 
 
-        EMClient.getInstance().logout(true, new EMCallBack() {
-            @Override
-            public void onSuccess() {
-                ToastUtil.showToast("退出成功");
-                startActivity(new Intent(FriendListActivity.this, LoginActivity.class));
-                finish();
-            }
-
-            @Override
-            public void onError(int code, String error) {
-                ToastUtil.showToast("退出失败，请稍后再试");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-        });
-
-
-    }
 }

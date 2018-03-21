@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.chat.adapters.MessageAdapter;
 import com.example.a41061.leaktrace.until.Utility;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMConversation;
@@ -41,7 +42,7 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
-        setTitle("聊天");
+        setTitle("Chat");
 
 
         Bundle bundle = getIntent().getExtras();
@@ -54,9 +55,11 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
                 EMConversation.EMConversationType.Chat, true);
 
 
+
         adapter = new MessageAdapter(this,conversation);
         recChat.setAdapter(adapter);
         recChat.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+
         refresh();
     }
 
