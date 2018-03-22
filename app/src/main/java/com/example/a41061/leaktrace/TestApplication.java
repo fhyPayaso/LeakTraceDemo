@@ -41,7 +41,6 @@ public class TestApplication extends Application {
     }
 
 
-
     /**
      * 初始化环信
      */
@@ -77,7 +76,7 @@ public class TestApplication extends Application {
                     return processName;
                 }
             } catch (Exception e) {
-                Log.d("Process", "Error>> :"+ e.toString());
+                Log.d("Process", "Error>> :" + e.toString());
             }
         }
         return processName;
@@ -87,3 +86,7 @@ public class TestApplication extends Application {
         return instance;
     }
 }
+
+
+
+

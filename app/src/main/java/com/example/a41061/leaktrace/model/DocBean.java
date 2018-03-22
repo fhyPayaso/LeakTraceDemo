@@ -1,5 +1,10 @@
 package com.example.a41061.leaktrace.model;
 
+import com.example.a41061.leaktrace.test.ChairFactory;
+import com.example.a41061.leaktrace.test.DeskFactory;
+import com.example.a41061.leaktrace.test.Product;
+import com.example.a41061.leaktrace.test.ProductFactory;
+
 /**
  * 文档类型model
  *
@@ -69,5 +74,19 @@ public class DocBean {
 
     public void setName(String name) {
         this.name = name;
+
+
+        DeskFactory deskFactory = new DeskFactory();
+        ChairFactory chairFactory = new ChairFactory();
+
+        Product desk = deskFactory.createProduct();
+        Product chair = chairFactory.createProduct();
+
+        desk.getProductName();
+        chair.getProductName();
+
     }
+
+
+
 }
