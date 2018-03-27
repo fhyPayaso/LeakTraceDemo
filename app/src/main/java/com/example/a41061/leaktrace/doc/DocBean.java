@@ -1,9 +1,11 @@
-package com.example.a41061.leaktrace.model;
+package com.example.a41061.leaktrace.doc;
 
 import com.example.a41061.leaktrace.test.ChairFactory;
 import com.example.a41061.leaktrace.test.DeskFactory;
 import com.example.a41061.leaktrace.test.Product;
 import com.example.a41061.leaktrace.test.ProductFactory;
+
+import java.io.Serializable;
 
 /**
  * 文档类型model
@@ -13,7 +15,7 @@ import com.example.a41061.leaktrace.test.ProductFactory;
  * email fanhongyu@hrsoft.net.
  */
 
-public class DocBean {
+public class DocBean implements Serializable{
 
 
     private String id;
@@ -74,19 +76,5 @@ public class DocBean {
 
     public void setName(String name) {
         this.name = name;
-
-
-        DeskFactory deskFactory = new DeskFactory();
-        ChairFactory chairFactory = new ChairFactory();
-
-        Product desk = deskFactory.createProduct();
-        Product chair = chairFactory.createProduct();
-
-        desk.getProductName();
-        chair.getProductName();
-
     }
-
-
-
 }
