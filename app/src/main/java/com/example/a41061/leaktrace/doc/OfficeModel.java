@@ -15,7 +15,7 @@ import java.io.Serializable;
  * email fanhongyu@hrsoft.net.
  */
 
-public class DocBean implements Serializable{
+public class OfficeModel implements Serializable{
 
 
     private String id;
@@ -25,12 +25,8 @@ public class DocBean implements Serializable{
     private String type;
 
 
-    public DocBean() {
 
-    }
-
-
-    public DocBean(String id, String path, String size, String name, String type) {
+    public OfficeModel(String id, String path, String size, String name, String type) {
         this.id = id;
         this.path = path;
         this.size = size;

@@ -10,11 +10,23 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            ndk {
+                abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -39,7 +51,6 @@ dependencies {
     //环信
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
-
 
     /**
      * 网络请求库
