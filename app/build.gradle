@@ -10,6 +10,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
     }
     buildTypes {
         release {
@@ -39,5 +43,19 @@ dependencies {
     //环信
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+
+    /**
+     * 网络请求库
+     */
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    //添加HttpLoggingInterceptor进行调试
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    //Retrofit到Gson进行转换的库
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //Retrofit到RxJava进行转换的库
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile "io.reactivex.rxjava2:rxjava:2.1.1"
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.squareup.leakcanary.LeakCanary;
+import com.tencent.smtt.sdk.QbSdk;
 
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,35 @@ public class TestApplication extends Application {
 
         instance = this;
         appContext = this;
+
+
+        QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
+            @Override
+            public void onCoreInitFinished() {
+
+            }
+
+            @Override
+            public void onViewInitFinished(boolean b) {
+
+
+                Log.i(TAG, "onViewInitFinished: 初始化是否完成"+b);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         initEM();
     }
 

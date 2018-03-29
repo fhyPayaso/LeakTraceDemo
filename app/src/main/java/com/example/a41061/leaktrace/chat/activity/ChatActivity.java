@@ -46,7 +46,8 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
 
 
         Bundle bundle = getIntent().getExtras();
-        chatId = bundle.getString(FriendListActivity.USER_ID);
+        chatId = "111111";
+        //bundle.getString(FriendListActivity.USER_ID);
 
         //添加信息监听
         EMClient.getInstance().chatManager().addMessageListener(this);
@@ -114,5 +115,4 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
         editChatContent.setText("");
         refresh();
     }
-
 }
