@@ -109,8 +109,7 @@ public class ChatActivity extends AppCompatActivity implements EMMessageListener
     @OnClick(R.id.btn_send)
     public void onViewClicked() {
 
-        emMessage = EMMessage.createTxtSendMessage(editChatContent
-                .getText().toString(), chatId);
+        emMessage = EMMessage.createTxtSendMessage(editChatContent.getText().toString(), chatId);
         EMClient.getInstance().chatManager().sendMessage(emMessage);
         editChatContent.setText("");
         refresh();
