@@ -7,6 +7,14 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static com.example.a41061.leaktrace.chat.activity.TestActivity.TAG;
@@ -68,11 +76,16 @@ public class OfficeHelper {
                     String size = cursor.getString(sizeIndex);
                     String name = path.substring(path.lastIndexOf("/") + 1);
 
-                    Log.i(TAG, "queryFiles: "+path);
+
+                    Log.i(TAG, "queryFiles: " + path);
                     officeModelList.add(new OfficeModel(id, path, size, name, suffix));
                 } while (cursor.moveToNext());
             }
             cursor.close();
         }
     }
+
+
+
+
 }

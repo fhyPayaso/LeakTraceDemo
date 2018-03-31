@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.a41061.leaktrace.R;
+import com.example.a41061.leaktrace.until.FileUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 
 import butterknife.BindView;
@@ -38,6 +39,7 @@ public class OfficeActivity extends AppCompatActivity{
         setContentView(R.layout.activity_doc);
         ButterKnife.bind(this);
         initViewPager();
+        FileUtil.verifyStoragePermissions(this);
     }
 
 

@@ -17,13 +17,22 @@ import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.until.ToastUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 
+
+import org.apache.poi.POIXMLDocument;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+
+import static com.example.a41061.leaktrace.chat.activity.TestActivity.TAG;
 
 /**
  * @author FanHongyu.
@@ -34,14 +43,14 @@ import butterknife.Unbinder;
 public class OfficeFragment extends Fragment implements TbsReaderView.ReaderCallback {
 
 
-    private static final String SUFFIX_DOC = "doc";
-    private static final String SUFFIX_DOCX = "docx";
-    private static final String SUFFIX_XLS = "xls";
-    private static final String SUFFIX_XLSX = "xlsx";
-    private static final String SUFFIX_PPT = "ppt";
-    private static final String SUFFIX_PPTX = "pptx";
-    private static final String SUFFIX_PDF = "pdf";
-    private static final String SUFFIX_TXT = "txt";
+    public static final String SUFFIX_DOC = "doc";
+    public static final String SUFFIX_DOCX = "docx";
+    public static final String SUFFIX_XLS = "xls";
+    public static final String SUFFIX_XLSX = "xlsx";
+    public static final String SUFFIX_PPT = "ppt";
+    public static final String SUFFIX_PPTX = "pptx";
+    public static final String SUFFIX_PDF = "pdf";
+    public static final String SUFFIX_TXT = "txt";
 
 
     @BindView(R.id.rec_office)
@@ -116,6 +125,10 @@ public class OfficeFragment extends Fragment implements TbsReaderView.ReaderCall
     }
 
 
+
+
+
+
     private void initRecyclerView() {
 
         mOfficeRecAdapter = new OfficeRecAdapter(getContext(), mOfficeList);
@@ -127,15 +140,7 @@ public class OfficeFragment extends Fragment implements TbsReaderView.ReaderCall
 
 
 
-//                FileInputStream fis = new FileInputStream(path);
-//                SlideShow pptfile = new SlideShow(new HSLFSlideShow(fis));
-//                int  pages = pptfile.getSlides().length;
-
-
-
-
                 ShowOfficeActivity.startActivity(getContext(), mOfficeList.get(position));
-
             }
         });
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
@@ -150,15 +155,10 @@ public class OfficeFragment extends Fragment implements TbsReaderView.ReaderCall
     }
 
 
-//    private void displayFile() {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("filePath", getLocalFile().getPath());
-//        bundle.putString("tempPath", Environment.getExternalStorageDirectory().getPath());
-//        boolean result = mTbsReaderView.preOpen(parseFormat(mFileName), false);
-//        if (result) {
-//            mTbsReaderView.openFile(bundle);
-//        }
-//    }
+
+
+
+
 
 
 }

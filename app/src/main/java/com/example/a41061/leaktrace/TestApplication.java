@@ -10,6 +10,7 @@ import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.squareup.leakcanary.LeakCanary;
 import com.tencent.smtt.sdk.QbSdk;
+import com.tom_roush.pdfbox.util.PDFBoxResourceLoader;
 
 import java.util.Iterator;
 import java.util.List;
@@ -41,6 +42,8 @@ public class TestApplication extends Application {
 
 
         initTbs();
+
+
         //initEM();
     }
 
@@ -98,7 +101,7 @@ public class TestApplication extends Application {
                     return processName;
                 }
             } catch (Exception e) {
-                Log.d("Process", "Error>> :" + e.toString());
+                Log.d("Process", "Error>> :"+ e.toString());
             }
         }
         return processName;
@@ -108,7 +111,3 @@ public class TestApplication extends Application {
         return instance;
     }
 }
-
-
-
-
