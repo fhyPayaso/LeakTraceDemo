@@ -17,6 +17,7 @@ import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.until.ToastUtil;
 import com.tencent.smtt.sdk.TbsReaderView;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +127,15 @@ public class OfficeFragment extends Fragment implements TbsReaderView.ReaderCall
 
 
 
+//                FileInputStream fis = new FileInputStream(path);
+//                SlideShow pptfile = new SlideShow(new HSLFSlideShow(fis));
+//                int  pages = pptfile.getSlides().length;
+
+
+
+
                 ShowOfficeActivity.startActivity(getContext(), mOfficeList.get(position));
+
             }
         });
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
