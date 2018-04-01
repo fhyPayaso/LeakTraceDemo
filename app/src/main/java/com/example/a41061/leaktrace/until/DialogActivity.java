@@ -1,22 +1,31 @@
-package com.example.a41061.leaktrace;
+package com.example.a41061.leaktrace.until;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
-public class FirstActivity extends AppCompatActivity {
+import com.example.a41061.leaktrace.R;
 
-    private  static final String TAG = "FirstActivity";
+/**
+ * @author fhyPayaso
+ * @since 2018/3/31 on 下午9:34
+ * fhyPayaso@qq.com
+ */
+public class DialogActivity extends AppCompatActivity {
+
+
+    private  static final String TAG = "DialogActivity";
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first);
+        setContentView(R.layout.activity_dialog);
         Log.i(TAG, "onCreate:");
     }
+
 
 
 
@@ -59,11 +68,11 @@ public class FirstActivity extends AppCompatActivity {
         Log.i(TAG, "onDestroy: ");
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
         Log.i(TAG, "onBackPressed: 点击返回");
     }
-
 }

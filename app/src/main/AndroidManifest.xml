@@ -55,7 +55,15 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <activity android:name=".FirstActivity"></activity>
         <activity android:name=".chat.activity.LoginActivity">
 
@@ -75,11 +83,12 @@
         <activity
             android:name=".doc.OfficeActivity"
             android:label="OfficeDemo">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
+
+        <activity android:name=".until.DialogActivity"
+            android:theme="@style/Theme.AppCompat.Dialog"
+         />
 
 
         <activity android:name=".doc.ShowOfficeActivity" />

@@ -1,17 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.example.a41061.leaktrace.MainActivity">
 
 
     <Button
-        android:id="@+id/btn_first"
+        android:id="@+id/btn_show_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="First"/>
+        android:text="show dialog" />
+
+    <Button
+        android:id="@+id/btn_show_full_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show full dialog" />
 
 
+    <Button
+        android:id="@+id/btn_show_dialog_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show dialog activity" />
 
-</RelativeLayout>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
+
+
+    
+    
+
+
+</LinearLayout>
