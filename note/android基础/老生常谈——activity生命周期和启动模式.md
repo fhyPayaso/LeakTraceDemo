@@ -143,9 +143,6 @@ Android系统存储和还原View的状态必须有一个唯一的ID
     }
 
 
-
-
-
 #### 2、低优先级的activity由于内存不足被杀死
 
 这种情况的数据保存方法和上一种情况相同，在这里简单说一下系统回收进程的优先级:
@@ -174,20 +171,80 @@ Android系统存储和还原View的状态必须有一个唯一的ID
 
 
 
+## activity的启动模式
+
+和生命周期一样，activity的四种`launchMode`也非常重要但又特别容易混淆，首先，activity是以任务栈的形式创建和销毁的，栈是一种“后进先出”的数据结构，在默认情况下，启动第一个activity时，系统将会为它创建一个任务栈并将活动置于栈底，而从这个activity启动的其他activity将会依次入栈，当用户连续按下返回键时，任务栈中的activity会从栈顶开始依次销毁。但是这样有一个弊端，就是对于某些activity我们不希望它总是重新创建，这时就需要采用不同的启动模式，下面就简单复习下activity的四种启动模式 :
 
 
++ **standard(标准模式)** : 这是activity的默认启动模式，只要启动activity就会创建一个新实例，例如有两个活动ActivityA和AciivityB，现在从活动A中连续3次启动B活动，那么活动B就会依次创建三个实例，按顺序进入ActivityA所在的任务栈中。
 
+![](http://p0y1qzu73.bkt.clouddn.com/18-4-1/20324066.jpg)
+
+执行`adb shell dumpsys activity`命令观察任务栈中的实际情况:
+
+![](http://p0y1qzu73.bkt.clouddn.com/18-4-2/55270989.jpg)
+
++ **singleTop(栈顶复用)** :在这种启动模式下，首先会判断要启动的活动是否已经存在于栈顶，如果是的话就不创建新实例，直接复用栈顶活动。如果要启动的活动不位于栈顶或在栈中无实例，则会创建新实例入栈。例如栈中有活动A、B、C，启动模式全部为`singleTop`,现在想要新建一个活动C，执行完成后任务栈中的情况依然为A、B、C; 但是如果新建一个活动A，因为A不位于栈顶，所以会重新创建实例入栈，任务栈变为:A、B、C、A，
+
+	![](http://p0y1qzu73.bkt.clouddn.com/18-4-1/21672515.jpg)
+	
+	初始任务栈状态
+	
+	![](http://p0y1qzu73.bkt.clouddn.com/18-4-2/56109014.jpg)
+	
+	接着启动活动A
+	
+	![](http://p0y1qzu73.bkt.clouddn.com/18-4-2/66489532.jpg)
+	
+	可以看到活动A被重新创建入栈，但如果是启动活动C,栈内活动不会改变，只不过活动C会先经历`onPause`，然后回调`onNewIntent`方法，紧接着执行`onResume`。
+	
+	![](http://p0y1qzu73.bkt.clouddn.com/18-4-2/33022579.jpg)
+
+
++ **singleTask(栈内复用)** : 这种模式比较复杂，是一种栈内单例模式，当一个activity启动时，会进行两次判断
+
+	+ 首先会寻找是否有这个活动需要的任务栈，如果没有就创建这个任务栈并将活动入栈，如果有的话就进入下一步判断。
+
+	+ 第二次判断这个栈中是否存在该activity的实例，如果不存在就新建activity入栈，如果存在的话就直接复用，并且带有`clearTop`效果，会将该实例上方的所有活动全部出栈，令这个activity位于栈顶。
+
+	**场景一**:假设当前任务栈中只有活动A，想要从A启动`launchMode`为`singleTask`的活动B，但是活动B指定的任务栈与A不同,这里用到了`TaskAffinity`属性，相当于指定了想要的任务栈，下面会详细介绍。
+	
+		<activity
+            android:name=".test.ActivityA"
+            android:taskAffinity="com.example.a41061.task1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".test.ActivityB"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.example.a41061.task2"/>
+
+	启动后可以看到活动B运行在了一个新task中。
+	
+	![](http://p0y1qzu73.bkt.clouddn.com/18-4-2/73842158.jpg)	
+	
+	**场景二**: 当前任务栈task1中存在活动A，从A中连续启动三个活动，顺序为B->C->B，B、C的启动模式均为`singleTask`，请求栈为task2，最后的启动结果将和上一种场景一样，不再重复展示，这里体现了`singleTask`模式的`clearTop`属性，第二次启动activityB后会复用栈底的实例，并将activityC出栈。
+	
+	
++ **singleInstance(单例)** : 这种模式是真正的单例模式，以这种模式启动的活动会单独创建一个任务栈，并且依然遵循栈内复用的特性，保证了这个栈中只能存在这一个活动。
+
+还有一些需要注意的属性
+
++ **onNewIntent()**方法 : 后三种模式都会出现活动复用的情况，一旦活动被复用，就会回调用`onNewIntent`方法,通过这个方法中的Intent参数就可以进行页面的更新，举一个实际应用场景的例子:
+	
+	+ 在活动A点击设置密码按钮进入活动B: `A->B`
+	+ 在活动B中设置密码后点击完成后进入活动C: `A->B->C`
+	+ 在活动C中点击确认，返回活动A，并且携带已经确认的信息: `A->B->C->A`
+	+ 活动A在`onNewIntent`方法中获取信息，将设置密码字样改为修改密码。
+
++ **TaskAffinity属性** : 这个属性代表活动的亲和性，即一个活动启动时想要指定的任务栈名字，在默认情况下，所有活动所需的任务栈名字为所应用的包名。
 
 
 #### 参考文章
 
 + [Android系统回收Activity的优先级](https://blog.csdn.net/lygsust/article/details/52777537)
 + [Android configChanges的属性值和含义](https://blog.csdn.net/qq_33544860/article/details/54863895)
-
-
-
-
-
-
-
-

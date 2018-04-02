@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LeakTrace.iml" filepath="$PROJECT_DIR$/LeakTrace.iml" />
       <module fileurl="file://$PROJECT_DIR$/LeakTraceDemo.iml" filepath="$PROJECT_DIR$/LeakTraceDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeakTraceDemo.iml" filepath="$PROJECT_DIR$/LeakTraceDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

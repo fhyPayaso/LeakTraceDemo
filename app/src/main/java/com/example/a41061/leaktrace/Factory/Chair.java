@@ -1,4 +1,4 @@
-package com.example.a41061.leaktrace.test;
+package com.example.a41061.leaktrace.Factory;
 
 /**
  * @author FanHongyu.
