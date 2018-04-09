@@ -39,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+
+
     private void initView() {
 
         editUsername = (EditText) findViewById(R.id.edit_username);
