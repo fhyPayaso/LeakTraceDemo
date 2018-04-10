@@ -49,7 +49,8 @@ public class ClientActivity extends AppCompatActivity {
     TextView mBtnSend;
 
     public static final String TAG = "ClientActivity";
-    private static final String SERVERIP = "192.168.1.15";
+    //工作室内网192.168.1.15
+    private static final String SERVERIP = "123.206.21.17";
     private String clientIp = "";
     private static final int SERVERPORT = 9999;
 
@@ -142,23 +143,33 @@ public class ClientActivity extends AppCompatActivity {
      */
     @OnClick(R.id.btn_send)
     public void onViewClicked() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
 
-                if (!"".equals(mEditContent.getText().toString().trim())) {
 
+        if (!"".equals(mEditContent.getText().toString().trim())) {
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
                     //获取输入框内容
                     String content = mEditContent.getText().toString();
                     out.println(content);
                     out.flush();
-                } else {
-                    ToastUtil.showToast("发送内容不能为空");
+
+                    Message message = mHandler.obtainMessage();
+                    message.what = 2;
+                    message.obj = content;
+                    mHandler.sendMessage(message);
+
+
                 }
-            }
-        }).start();
-        //清空输入框
-        mEditContent.setText("");
+            }).start();
+
+            //清空输入框
+            mEditContent.setText("");
+
+        } else {
+            ToastUtil.showToast("发送内容不能为空");
+        }
     }
 
 
@@ -168,17 +179,17 @@ public class ClientActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
+            String newCotent = (String) msg.obj;
+            Log.i(TAG, "handleMessage: " + newCotent);
+
             if (msg.what == 1) {
-                String newCotent = (String) msg.obj;
-                Log.i(TAG, "handleMessage: " + newCotent);
-//                String oldContent = txtMessage.getText().toString();
-//                txtMessage.setText(oldContent + "\n" + newCotent);
-
-
                 mChatBeanList.add(new ChatBean(newCotent, "aaa", 0));
-                mSocketChatAdapter.notifyDataSetChanged();
-                recChat.scrollToPosition(mChatBeanList.size() - 1);
+            } else if (msg.what == 2) {
+                mChatBeanList.add(new ChatBean(newCotent, "aaa", 1));
             }
+
+            mSocketChatAdapter.notifyDataSetChanged();
+            recChat.scrollToPosition(mChatBeanList.size() - 1);
         }
     };
 
@@ -190,4 +201,25 @@ public class ClientActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelSocket();
+
+    }
+
+
+    private void cancelSocket() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                out.println("%exit%");
+                out.flush();
+
+            }
+        }).start();
+    }
 }
+

@@ -19,16 +19,16 @@ import com.tom_roush.pdfbox.pdmodel.PDDocument;
 import com.tom_roush.pdfbox.util.PDFBoxResourceLoader;
 
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.hslf.HSLFSlideShow;
-import org.apache.poi.hslf.usermodel.SlideShow;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.xslf.usermodel.XMLSlideShow;
-import org.apache.poi.xssf.extractor.XSSFExcelExtractor;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+//import org.apache.poi.POIXMLDocument;
+//import org.apache.poi.hslf.HSLFSlideShow;
+//import org.apache.poi.hslf.usermodel.SlideShow;
+//import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+//import org.apache.poi.hwpf.HWPFDocument;
+//import org.apache.poi.hwpf.extractor.WordExtractor;
+//import org.apache.poi.xslf.usermodel.XMLSlideShow;
+//import org.apache.poi.xssf.extractor.XSSFExcelExtractor;
+//import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+//import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -138,45 +138,45 @@ public class ShowOfficeActivity extends AppCompatActivity implements TbsReaderVi
         switch (model.getType()) {
 
 
-            case OfficeFragment.SUFFIX_DOC:
-                WordExtractor doc = new WordExtractor(new FileInputStream(path));
-                pages = doc.getSummaryInformation().getPageCount();
-                break;
-
-            case OfficeFragment.SUFFIX_DOCX:
-                XWPFDocument docx = new XWPFDocument(POIXMLDocument.openPackage(path));
-                pages = docx.getProperties().getExtendedProperties().getUnderlyingProperties().getPages();
-                break;
-
-            case OfficeFragment.SUFFIX_XLS:
-                HSSFWorkbook xls = new HSSFWorkbook(new FileInputStream(path));
-                pages = xls.getNumberOfSheets();
-                break;
-
-            case OfficeFragment.SUFFIX_XLSX:
-                XSSFWorkbook xlsx = new XSSFWorkbook(new FileInputStream(path));
-                pages = xlsx.getNumberOfSheets();
-                break;
-
-            case OfficeFragment.SUFFIX_PPT:
-                SlideShow ppt = new SlideShow(new HSLFSlideShow(new FileInputStream(path)));
-                pages = ppt.getSlides().length;
-
-
-                break;
-
-            case OfficeFragment.SUFFIX_PPTX:
-                XMLSlideShow pptx = new XMLSlideShow(new FileInputStream(path));
-                pages = pptx.getSlides().length;
-                break;
-
-            case OfficeFragment.SUFFIX_PDF:
-                PDDocument document = PDDocument.load(new File(path));
-                pages = document.getNumberOfPages();
-                break;
-
-            default:
-                break;
+//            case OfficeFragment.SUFFIX_DOC:
+//                WordExtractor doc = new WordExtractor(new FileInputStream(path));
+//                pages = doc.getSummaryInformation().getPageCount();
+//                break;
+//
+//            case OfficeFragment.SUFFIX_DOCX:
+//                XWPFDocument docx = new XWPFDocument(POIXMLDocument.openPackage(path));
+//                pages = docx.getProperties().getExtendedProperties().getUnderlyingProperties().getPages();
+//                break;
+//
+//            case OfficeFragment.SUFFIX_XLS:
+//                HSSFWorkbook xls = new HSSFWorkbook(new FileInputStream(path));
+//                pages = xls.getNumberOfSheets();
+//                break;
+//
+//            case OfficeFragment.SUFFIX_XLSX:
+//                XSSFWorkbook xlsx = new XSSFWorkbook(new FileInputStream(path));
+//                pages = xlsx.getNumberOfSheets();
+//                break;
+//
+//            case OfficeFragment.SUFFIX_PPT:
+//                SlideShow ppt = new SlideShow(new HSLFSlideShow(new FileInputStream(path)));
+//                pages = ppt.getSlides().length;
+//
+//
+//                break;
+//
+//            case OfficeFragment.SUFFIX_PPTX:
+//                XMLSlideShow pptx = new XMLSlideShow(new FileInputStream(path));
+//                pages = pptx.getSlides().length;
+//                break;
+//
+//            case OfficeFragment.SUFFIX_PDF:
+//                PDDocument document = PDDocument.load(new File(path));
+//                pages = document.getNumberOfPages();
+//                break;
+//
+//            default:
+//                break;
 
 
         }
