@@ -93,6 +93,8 @@
 
         <activity android:name=".doc.ShowOfficeActivity" />
 
+        <activity android:name=".socket.ClientActivity"/>
+
     </application>
 
 </manifest>

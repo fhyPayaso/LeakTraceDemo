@@ -1,8 +1,5 @@
 # 初探Android内存泄漏
 
-标签 ： Android 
-
-
 > 作者：fhyPayaso
 
 
