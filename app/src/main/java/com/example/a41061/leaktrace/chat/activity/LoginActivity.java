@@ -15,8 +15,7 @@ import com.example.a41061.leaktrace.until.Utility;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
-import com.squareup.haha.perflib.Main;
-import com.squareup.haha.trove.THash;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         setTitle("ChatDemo");
         initView();
     }
+
+
 
 
     private void initView() {

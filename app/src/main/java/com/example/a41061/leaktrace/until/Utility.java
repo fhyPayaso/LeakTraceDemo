@@ -10,9 +10,11 @@ import android.os.Looper;
  */
 
 public final class Utility {
+
     private static Handler uiHandle;
 
     private Utility() {
+
     }
 
     /**

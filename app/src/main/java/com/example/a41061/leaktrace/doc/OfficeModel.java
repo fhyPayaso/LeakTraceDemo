@@ -1,10 +1,5 @@
 package com.example.a41061.leaktrace.doc;
 
-import com.example.a41061.leaktrace.test.ChairFactory;
-import com.example.a41061.leaktrace.test.DeskFactory;
-import com.example.a41061.leaktrace.test.Product;
-import com.example.a41061.leaktrace.test.ProductFactory;
-
 import java.io.Serializable;
 
 /**

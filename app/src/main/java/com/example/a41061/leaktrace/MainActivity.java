@@ -19,10 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.a41061.leaktrace.until.DialogActivity;
-import com.squareup.haha.perflib.Main;
-
 
 public class MainActivity extends AppCompatActivity {
 

@@ -8,8 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 
 import java.io.File;
 import java.io.FileInputStream;
