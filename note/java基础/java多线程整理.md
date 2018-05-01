@@ -1,6 +1,22 @@
 
 ### 1、进程和线程
 
++ 并发:在同一个时间段内，同一个cpu上执行多个任务，但在某一时刻cpu只处理一个任务。
++ 并行:同一时间段内，多个cpu执行多个任务，在某一时刻有多个任务同时执行，并且相互之间没有干扰。
+
+这里再详细说一下并发时任务是如何调度的，引用一下博客：
+
+
+> 大部分操作系统(如Windows、Linux)的任务调度是采用时间片轮转的抢占式调度方式，也就是说一个任务执行一小段时间后强制暂停去执行下一个任务，每个任务轮流执行。任务执行的一小段时间叫做时间片，任务正在执行时的状态叫运行状态，任务执行一段时间后强制暂停去执行下一个任务，被暂停的任务就处于就绪状态等待下一个属于它的时间片的到来。这样每个任务都能得到执行，由于CPU的执行效率非常高，时间片非常短，在各个任务之间快速地切换，给人的感觉就是多个任务在“同时进行”，这也就是我们所说的并发(别觉得并发有多高深，它的实现很复杂，但它的概念很简单，就是一句话：多个任务同时执行)。
+
+
+![](http://p0y1qzu73.bkt.clouddn.com/18-3-31/32283692.jpg)
+
+在多个任务中切换也是要付出代价的,一个任务消耗完了时间片，需要根据调度策略来选取下一个任务来执行，而这一过程也需要消耗时间，叫做**切换耗时**,而这也将影响时间片大小的选取。
+
+
+
+
 + **进程**：进程代表一个运行中的程序，是资源分配与调度的基本单位。进程有三大特性：
 	+ 独立性：独立的资源，私有的地址空间，进程间互不影响。
 	+ 动态性：进程具有生命周期。
@@ -373,32 +389,188 @@ synchronized是Java中的关键字，是一种同步锁。
 
 #### (4)volatile
 
+volatile是java中一种轻量级的同步机制，它的作用是保证线程之间共享变量的可见性，当线程A修改了一个volatile修饰的共享变量之后，线程B会读取该变量时，会获得一个修改后的正确值。
+
+**(1)如何保证内存可见性**: 在java虚拟机的内存模型中，有主内存和工作内存的概念，每个线程对应一个工作内存，并共享主内存的数据。
+
++ 对于普通变量：读操作会优先读取工作内存的数据，如果工作内存中不存在，则从主内存中拷贝一份数据到工作内存中；写操作只会修改工作内存的副本数据，这种情况下，其它线程就无法读取变量的最新值。
+
++ 对于volatile变量，读操作时JMM会把工作内存中对应的值设为无效，要求线程从主内存中读取数据；写操作时JMM会把工作内存中对应的数据刷新到主内存中，这种情况下，其它线程就可以读取变量的最新值。
+
+
+**(2)不能保证原子性**: volatile关键字虽然能保证变量在线程间的可见性，但是并不能保证原子性。
+
+原子性指的是一个操作具有在执行过程中不会被任何因素打断的性质。在Java中，对基本数据类型的变量的读取和赋值操作是原子性操作，即这些操作是不可被中断的，要么执行，要么不执行。例如 `i=0` 这个操作是不可分割的，所以是原子操作，但是i++则不是，他的操作分为三步：
+
++ 从主内存中取出i的值
++ i自增1
++ 将i存到主内存
+
+原子性的线程不安全在介绍synchronized时已经说过，下面来看看volatile为什么不能保证原子操作的线程安全:
+
+
+
+
+	public class Test {
+	
+	    public volatile int inc = 0;
+	
+	    public void increase() {
+	        inc++;
+	    }
+	
+	    public static void main(String[] args) {
+	        final Test test = new Test();
+	        for (int i = 0; i < 10; i++) {
+	
+	            new Thread(new Runnable() {
+	                @Override
+	                public void run() {
+	                    for (int j = 0; j < 1000; j++) {
+	                        test.increase();
+	                    }
+	                }
+	            }).start();
+	
+	        }
+	        while (Thread.activeCount() > 1) {
+	            Thread.yield();
+	        }
+	
+	        System.out.println(test.inc);//输出值为9933
+	    }
+	}
+
+
+虽然volatile可以让每个线程读取的变量都是最新的，但是可以看到，依然不能保证线程安全,下面进行一下模拟:
+
++ 目前inc的值为10，线程1从主工作区中获取最新值，但是还没有来得及进行自增操作就线程1就进入阻塞状态
++ 此时线程2开始进入运行状态，从主工作区中获取inc的值依然为10，自增后写入主工作区，之后进入阻塞状态。
++ 线程1重新进入运行状态，完成自增并写入工作区内存。
+
+这时候inc的值为11，说明volatile无法保证原子操作的线程安全。
+
+
+
+**(3)保证有序性**：
+
+
+**什么是指令重排** : 指令重排序是JVM为了优化指令，提高程序运行效率，在不影响单线程程序执行结果的前提下，尽可能地提高并行度。编译器、处理器也遵循这样一个目标。注意是单线程。多线程的情况下指令重排序就会给程序员带来问题。
+
+不同的指令间可能存在数据依赖。比如下面计算圆的面积的语句：
+
+	double r = 2.3d;//(1)
+	
+	double pi =3.1415926; //(2)
+	
+	double area = pi* r * r; //(3)
+
+area的计算依赖于r与pi两个变量的赋值指令。而r与pi无依赖关系，即计算顺序(1)(2)(3)与(2)(1)(3) 对于r、pi、area变量的结果并无区别。编译器、Runtime在优化时可以根据情况重排序（1）与（2），而丝毫不影响程序的结果。但要注意的是指令重排必须要在不影响最终结果的前提下进行。
+
+
+
+volatile的另一个特点便是能够禁止指令重排，从而在一定程度上保证程序的有序性:
+
++ 当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作一定还未进行
++ 在进行指令优化时，不能将在对volatile变量的读操作或者写操作的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。
+
+
+	    public static int a,b;
+	    public static volatile boolean c;
+	
+	    public static void main(String[] args) {
+	
+	        a = 1; //语句1
+	        b = 2; //语句2
+	        c = true; //语句3
+	        a = 3; //语句4
+	        b = 4; //语句5
+	    }
+
+在指令重排的过程中，语句3不会在语句1或者语句2的前面执行，也不会在语句4或者语句5的后面执行，但是1和2之间以及4和5之间的顺序依然是不能保证的。同时当语句1、2执行完之后的结果对语句3、4、5都是可见的。
+
 
 ### 7、线程局部变量ThreadLocal
+
+ThreadLocal是一个关于创建线程局部变量的类。ThreadLocal会为每一个线程提供一个独立的变量副本，从而隔离了多个线程对数据的访问冲突。因为每一个线程都拥有自己的变量副本，从而也就没有必要对该变量进行同步了。
+
+具体的实现原理我们来看一看这两个类的get()和set()方法源码
+
+	public void set(T value) {  
+	       Thread t = Thread.currentThread();  
+	       ThreadLocalMap map = getMap(t);  
+	       if (map != null)  
+	           map.set(this, value);  
+	       else  
+	           createMap(t, value);  
+	}  
+	
+	
+set方法首先通过`Thread.currentThread()`方法来获取当前线程，然后取出当前线程对象的成员变量`ThreadLocalMap`,如果存在就设置键值对，其中key为ThreadLocal本身，value为想要设置的值，如果不存在就创建一个
+
+
+	public T get() {  
+        Thread t = Thread.currentThread();  
+        ThreadLocalMap map = getMap(t);  
+        if (map != null) {  
+            ThreadLocalMap.Entry e = map.getEntry(this);  
+            if (e != null) {  
+                T result = (T)e.value;  
+                return result;  
+            }  
+        }  
+        return setInitialValue();  
+    }
+    
+    ThreadLocalMap getMap(Thread t) {
+        return t.threadLocals;
+    }  
+
+然后来看看get方法，从代码中可以看出ThreadLocalMap中存放的就是Entry，Entry的KEY就是ThreadLocal，VALUE就是值。而map是从Thread t中获得的。也就是说map虽然是在threadlocal的内部类，但是却是保存在Thread中的。
+
+
+下面来看一下使用场景:
+
+![](http://p0y1qzu73.bkt.clouddn.com/18-4-22/40318473.jpg)
+
+
+![](http://p0y1qzu73.bkt.clouddn.com/18-4-22/82361554.jpg)
+
+
+可以看到在不同的线程中创建了独立的变量副本。
 
 
 
 ### 8、线程池
 
+在开发过程中，不推荐显示的创建新线程，而是推荐使用线程池的方法进行线程的处理，这样可以避免频繁的创建销毁线程带来的资源的损耗，
+在java中线程池的实现类为`ThreadPoolExecutor` ，其构造方法的参数为:
 
 
-系统可以直接创建四种配置好参数的线程池:
+	ThreadPoolExecutor mExecutor = new ThreadPoolExecutor(corePoolSize,// 核心线程数  
+	                        maximumPoolSize, // 最大线程数  
+	                        keepAliveTime, // 闲置线程存活时间  
+	                        TimeUnit.MILLISECONDS,// 时间单位  
+	                        new LinkedBlockingDeque<Runnable>(),// 线程队列  
+	                        Executors.defaultThreadFactory(),// 线程工厂  
+	                        new AbortPolicy()// 队列已满,而且当前线程数已经超过最大线程数时的异常处理策略  
+	                );  
 
 
-+ **FixedThreadPool** : 创建固定大小的线程池。每次提交一个任务就创建一个线程，直到线程达到线程池的最大大小。线程池的大小一旦达到最大值就会保持不变，新添加的,如果某个线程因为执行异常而结束，那么线程池会补充一个新线程。
+可以直接创建java中四种配置好参数的线程池:
+
++ **FixedThreadPool** : 创建固定大小的线程池。每次提交一个任务就创建一个线程，直到线程达到线程池的最大大小。线程池的大小一旦达到最大值就会保持不变，新添加的会被加入到任务队列中。如果某个线程因为执行异常而结束，那么线程池会补充一个新线程。
 
 
-+ CachedThreadPool:
++ **CachedThreadPool**: 创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
 
-+ ScheduledThreadPool:一个大小无限的线程池。此线程池支持定时以及周期性执行任务的需求。
+	+ 工作线程的创建数量几乎没有限制(其实也有限制的,数目为Interger. MAX_VALUE), 这样可灵活的往线程池中添加线程。
+	+ 如果长时间没有往线程池中提交任务，即如果工作线程空闲了指定的时间(默认为1分钟)，则该工作线程将自动终止。终止后，如果你又提交了新的任务，则线程池重新创建一个工作线程。
+	+ 在使用CachedThreadPool时，一定要注意控制任务的数量，否则，由于大量线程同时运行，很有会造成系统瘫痪。
 
-+ SingleThreadExecutor**: 创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这个唯一的线程因为异常结束，那么会有一个新的线程来替代它。此线程池保证所有任务的执行顺序按照任务的提交顺序执行。
++ **ScheduledThreadPool**:一个大小无限的线程池。此线程池支持定时以及周期性执行任务的需求。
 
-
-
-
-
-
++ **SingleThreadExecutor**: 创建一个单线程的线程池。这个线程池只有一个线程在工作，也就是相当于单线程串行执行所有任务。如果这个唯一的线程因为异常结束，那么会有一个新的线程来替代它。此线程池保证所有任务的执行顺序按照任务的提交顺序执行。
 
 
 
@@ -409,6 +581,13 @@ synchronized是Java中的关键字，是一种同步锁。
 
 [深入理解Java并发之synchronized实现原理](https://blog.csdn.net/javazejian/article/details/72828483)
 
+[java volatile关键字解惑](https://www.jianshu.com/p/195ae7c77afe)
+
+[ThreadLocal用法和实现原理](https://www.cnblogs.com/WuXuanKun/p/5827060.html)
+
+[编程思想之多线程与多进程](https://blog.csdn.net/luoweifu/article/details/46595285)
+
+[深入理解并发/并行，阻塞/非阻塞，同步/异步](https://www.jianshu.com/p/2116fff869b6)
 
 
 

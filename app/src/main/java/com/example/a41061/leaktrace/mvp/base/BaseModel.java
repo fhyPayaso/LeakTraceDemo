@@ -1,4 +1,4 @@
-package com.example.a41061.leaktrace.mvp;
+package com.example.a41061.leaktrace.mvp.base;
 
 import android.os.Looper;
 import android.os.Message;
@@ -17,6 +17,7 @@ import java.util.List;
 public abstract class BaseModel<T> implements WeakHandler.IHandler {
 
     protected static final int MSG_REQUEST = 0;
+
     protected boolean mIsLoading;
     protected WeakHandler mHandler;
     protected T mData;

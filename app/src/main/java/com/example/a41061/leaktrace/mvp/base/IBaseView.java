@@ -1,4 +1,4 @@
-package com.example.a41061.leaktrace.mvp;
+package com.example.a41061.leaktrace.mvp.base;
 
 /**
  * @author FanHongyu.
