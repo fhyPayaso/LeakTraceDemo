@@ -94,16 +94,20 @@
 
 
         <activity
-            android:name=".test.ActivityA"
+            android:name=".test.ActivityAA"
             android:taskAffinity="com.example.a41061.task1"
             >
 
         </activity>
 
-        <activity
-            android:name=".test.ActivityB"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.example.a41061.task2"/>
+        <activity android:name=".test.ActivityB">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+
+        </activity>
 
 
         <activity
@@ -117,10 +121,7 @@
 
         <activity android:name=".socket.SocketLoginActivity">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
 
         </activity>
     </application>

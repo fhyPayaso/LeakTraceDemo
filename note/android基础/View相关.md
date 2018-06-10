@@ -60,6 +60,73 @@ TouchSlop是系统所能识别出的最小滑动距离，获取方式为：
 
 #### 5.GestureDetector(手势检测)
 
+GestureDetector主要用于检测用户的手势动作，使用的时候可以让被监听的view实现两个接口：`OnGestureListener`和`OnDoubleTapListener`,接下来看看两个接口中的几个回调方法:
+
++ **OnGestureListener**
+
+	+ onDown(MotionEvent e) : 手指触摸屏幕瞬间触发
+	+ onShowPress(MotionEvent e) : 手指触摸屏幕但未松开的状态
+	+ onSingleTapUp(MotionEvent e) : 手指离开屏幕时触发
+	+ onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) : 手指按下屏幕并拖动
+	+ onLongPress(MotionEvent e) : 手指长按屏幕事件
+	+ onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) : 快速滑动事件
+
++ **OnDoubleTapListener**
+
+	+ onSingleTapConfirmed(MotionEvent e) : 严格的单击事件，不是双击事件中的一个点击
+	+ onDoubleTap(MotionEvent e) : 双击，由两次单击组成，不能和onSingleTapConfirmed共存
+	+ onDoubleTapEvent(MotionEvent e) : 表示发生了双击事件
+
+### 二、view的分发机制
+
+view的分发机制是面试中经常会问到的问题，也是后面解决view滑动冲突的理论基础，接下来会从源码角度对整个事件的分发机制进行简单分析。
+事件分发实际上就是把一个MotionEvent事件传递给一个具体的view的过程，其中涉及到三个很重要的方法 : 
+
++ **boolean dispatchTouchEvent(MotionEvent ev)** : 该方法主要用于事件的分发，即事件传递到当前view时被调用，返回值受当前view的`onTouchEvent`和子view的`dispatchTouchEvent`返回值影响，true表示事件已经被消耗，false表示事件未被消耗。
+
+
++ **boolean onInterceptTouchEvent(MotionEvent ev)** : 在`dispatchTouchEvent`中被调用，表示是否拦截当前事件，只有ViewGroup才有，并且默认返回false。如果一个View决定拦截事件，那么整个事件序列都将交给这个view去处理，并且后续的事件都不会再调用`onInterceptTouchEvent`方法。
+
+
++ **boolean onTouchEvent(MotionEvent event)** : 在`dispatchTouchEvent`中被调用，表示消耗事件，返回结果表示是否消耗成功，如果一个view消耗了一个`ACTION_DOWN`事件，那么后续的事件序列都会交给这个view去处理，否则该view将不会处理后续事件。
+
+三个方法的关系可以用如下伪代码来表示 : 
+
+	public boolean dispatchTouchEvent(MotionEvent ev) {
+	
+	        boolean consume = false;
+	
+	        //首先判断是否需要拦截该事件
+	        if (onInterceptTouchEvent(ev)) {
+	            //如果拦截交给自己处理
+	            consume = onTouchEvent(ev);
+	        } else {
+	            //不拦截则交给子view处理
+	            consume = child.dispatchTouchEvent(ev);
+	        }
+	        return consume;
+	    }
+	
+下面从事件分发的顺序对源码进行简单分析 : 
+
+#### 1.activity对事件的分发
+
+首先来看看activity里面的`dispatchTouchEvent`方法具体做了哪些事
+
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+            onUserInteraction();
+        }
+        if (getWindow().superDispatchTouchEvent(ev)) {
+            return true;
+        }
+        return onTouchEvent(ev);
+    }
+
+
+
+
+
 
 
 
