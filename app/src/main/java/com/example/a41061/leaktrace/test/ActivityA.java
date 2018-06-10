@@ -1,7 +1,10 @@
 package com.example.a41061.leaktrace.test;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,7 +17,7 @@ import com.example.a41061.leaktrace.R;
  * email fanhongyu@hrsoft.net.
  */
 
-public class ActivityA extends AppCompatActivity{
+public class ActivityA extends AppCompatActivity implements ServiceConnection{
 
 
     @Override
@@ -30,5 +33,16 @@ public class ActivityA extends AppCompatActivity{
                 startActivity(new Intent(ActivityA.this,ActivityB.class));
             }
         });
+        bindService(new Intent(ActivityA.this,MyService.class),this,0);
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
     }
 }
