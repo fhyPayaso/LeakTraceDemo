@@ -7,8 +7,6 @@
 
 + recyclerview混排和优化
 
-+ view优化
-
 + fragment的生命周期（replace  add的区别）
 
 + 内存泄露
