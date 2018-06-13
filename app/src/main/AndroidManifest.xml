@@ -42,6 +42,7 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
         <service android:name=".test.MyService"/>
+        <service android:name=".service.TestService"/>
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
@@ -102,10 +103,6 @@
 
         <activity android:name=".test.ActivityB">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
 
         </activity>
 
@@ -122,7 +119,13 @@
         <activity android:name=".socket.SocketLoginActivity">
 
 
-
         </activity>
+        <activity android:name=".view.ViewActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".service.ServiceActivity"/>
     </application>
 </manifest>

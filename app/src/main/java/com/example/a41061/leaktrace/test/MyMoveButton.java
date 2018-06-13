@@ -30,9 +30,6 @@ public class MyMoveButton extends AppCompatTextView {
         int sx = getScrollX();
         int delta = dx - sx;
         mScroller.startScroll(sx,0,delta,1000);
-
-
-
     }
 
 
@@ -43,6 +40,5 @@ public class MyMoveButton extends AppCompatTextView {
             smoothScollto(mScroller.getCurrX(), mScroller.getCurrY());
             postInvalidate();
         }
-
     }
 }
