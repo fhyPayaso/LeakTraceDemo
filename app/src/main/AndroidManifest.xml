@@ -43,6 +43,7 @@
             android:permission="android.permission.BIND_JOB_SERVICE"/>
         <service android:name=".test.MyService"/>
         <service android:name=".service.TestService"/>
+        <service android:name=".service.TestIntentService"/>
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>

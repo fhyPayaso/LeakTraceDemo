@@ -2,9 +2,12 @@ package com.example.a41061.leaktrace.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import com.example.a41061.leaktrace.until.ToastUtil;
 
 import static com.example.a41061.leaktrace.socket.ClientActivity.TAG;
 
@@ -14,31 +17,42 @@ import static com.example.a41061.leaktrace.socket.ClientActivity.TAG;
  * email fanhongyu@hrsoft.net.
  */
 
-public class TestService extends Service{
+public class TestService extends Service {
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return new MyBinder();
     }
 
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "onCreate: ");
         super.onCreate();
     }
 
-
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "onStartCommand: ");
-        return super.onStartCommand(intent, flags, startId);
+    public boolean onUnbind(Intent intent) {
+
+        ToastUtil.showToast(intent.getStringExtra("name"));
+
+        return super.onUnbind(intent);
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy: ");
         super.onDestroy();
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+    }
+
+    public class MyBinder extends Binder {
+
+        public String getString() {
+            return "连接成功";
+        }
     }
 }
