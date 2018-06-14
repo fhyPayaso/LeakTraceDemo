@@ -90,8 +90,8 @@ public class ClientActivity extends AppCompatActivity {
     }
 
 
+    @SuppressWarnings("all")
     private void initSocket() {
-
 
         new Thread(new Runnable() {
             @Override

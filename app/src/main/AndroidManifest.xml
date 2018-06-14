@@ -41,6 +41,8 @@
             android:name="com.hyphenate.chat.EMJobService"
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".test.MyService"/>
+        <service android:name=".service.TestService"/>
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
@@ -93,16 +95,16 @@
 
 
         <activity
-            android:name=".test.ActivityA"
+            android:name=".test.ActivityAA"
             android:taskAffinity="com.example.a41061.task1"
             >
 
         </activity>
 
-        <activity
-            android:name=".test.ActivityB"
-            android:launchMode="singleTask"
-            android:taskAffinity="com.example.a41061.task2"/>
+        <activity android:name=".test.ActivityB">
+
+
+        </activity>
 
 
         <activity
@@ -116,11 +118,17 @@
 
         <activity android:name=".socket.SocketLoginActivity">
 
+
+        </activity>
+        <activity android:name=".view.ViewActivity">
+
+        </activity>
+        <activity android:name=".service.ServiceActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
         </activity>
     </application>
 </manifest>

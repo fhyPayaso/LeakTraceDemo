@@ -30,12 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView mTextView;
 
 
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

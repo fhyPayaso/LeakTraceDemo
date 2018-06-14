@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
     defaultConfig {
         applicationId "com.example.a41061.leaktrace"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -25,6 +26,10 @@ android {
         main {
             jniLibs.srcDirs = ['libs']
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -64,5 +69,11 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     compile 'com.tom_roush:pdfbox-android:1.8.9.1'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
+    compile 'com.airbnb.android:lottie:1.0.1'
+
+}
+repositories {
+    mavenCentral()
 }

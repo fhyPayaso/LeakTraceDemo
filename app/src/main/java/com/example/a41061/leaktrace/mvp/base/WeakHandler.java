@@ -1,4 +1,4 @@
-package com.example.a41061.leaktrace.mvp;
+package com.example.a41061.leaktrace.mvp.base;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -7,6 +7,8 @@ import android.os.Message;
 import java.lang.ref.WeakReference;
 
 /**
+ * handler弱引用封装
+ *
  * @author FanHongyu.
  * @since 18/4/18 13:39.
  * email fanhongyu@hrsoft.net.
