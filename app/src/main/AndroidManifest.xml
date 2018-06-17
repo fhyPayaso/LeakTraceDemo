@@ -44,6 +44,8 @@
         <service android:name=".test.MyService"/>
         <service android:name=".service.TestService"/>
         <service android:name=".service.TestIntentService"/>
+        <service android:name=".service.TestService$GrayInnerService"/>
+        <service android:name=".service.TestService$InnerService"/>
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
