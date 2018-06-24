@@ -1,22 +1,10 @@
 package com.example.a41061.leaktrace.service;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
-
-import com.example.a41061.leaktrace.MainActivity;
-import com.example.a41061.leaktrace.R;
-import com.example.a41061.leaktrace.until.ToastUtil;
-
-import static android.app.PendingIntent.getActivity;
-import static com.example.a41061.leaktrace.socket.ClientActivity.TAG;
 
 /**
  * @author FanHongyu.
@@ -38,9 +26,9 @@ public class TestService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Intent innerIntent = new Intent(this,InnerService.class);
+        Intent innerIntent = new Intent(this, InnerService.class);
         startService(innerIntent);
-        startForeground(SERVICE_ID,new Notification());
+        startForeground(SERVICE_ID, new Notification());
     }
 
     public static class InnerService extends Service {

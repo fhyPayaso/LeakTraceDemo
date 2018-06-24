@@ -182,17 +182,15 @@ IntentService是Service的子类，它默认为我们开启了一个工作线程
 
 ### Service保活
 
-如果我们希望service能够一直在后台运行，不希望被用户或系统杀死，就需要采取一些特殊的方法，下面将从几个角度来介绍一下常用的service保活方法。
-
-
+如果我们希望service能够一直在后台运行，不希望被用户或系统杀死，就需要采取一些特殊的方法，下面将从几个角度来介绍一下常用的service保活方法,当然有些方法只是理论上可行，需要根据具体情况来使用。
 
 #### 1、修改onStartCommand方法的返回值
 
 在`onStartCommand`方法中，可以选择返回系统提供的几个返回值 :
 
 + **START_STICKY** : 该返回值表示当service被杀掉之后，系统会重新尝试创建该service，并执行`onStartCommand`回调方法，但是该回调方法中的Intent参数为null。
-+ **START_NOT_STICKY** : 该返回值表示在默认情况下，service被销毁后不会主动重新创建，只有当接收到新的intent对象时，该服务才会重新创建，这种方式可以避免在不需要的时候运行服务。
-+ **START_REDELIVER_INTENT** : 该返回值与**START_STICKY**相似，同样会在service销毁后重新创建，但区别是service销毁前会将最后一次传入的intent的参数保存，等到新service创建的时候再重新传入。
++ **START\_NOT\_STICKY** : 该返回值表示在默认情况下，service被销毁后不会主动重新创建，只有当接收到新的intent对象时，该服务才会重新创建，这种方式可以避免在不需要的时候运行服务。
++ **START\_REDELIVER\_INTENT** : 该返回值与**START_STICKY**相似，同样会在service销毁后重新创建，但区别是service销毁前会将最后一次传入的intent的参数保存，等到新service创建的时候再重新传入。
 
 理论上我们可以根据修改这些返回值来达到保活的目的，但实际上这种方式的重启效果并不理想。
 
