@@ -26,8 +26,8 @@ public class TestService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Intent innerIntent = new Intent(this, InnerService.class);
-        startService(innerIntent);
+//        Intent innerIntent = new Intent(this, InnerService.class);
+//        startService(innerIntent);
         startForeground(SERVICE_ID, new Notification());
     }
 
