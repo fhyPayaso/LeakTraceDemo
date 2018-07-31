@@ -4,7 +4,13 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.RemoteException;
 import android.support.annotation.Nullable;
+
+import com.example.a41061.leaktrace.IMyAidlInterface;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author FanHongyu.
@@ -16,35 +22,29 @@ public class TestService extends Service {
 
     public static final int SERVICE_ID = 1001;
 
+    private List<TestBean> mList;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+
+        mList = new ArrayList<>();
+
+        return mIBinder;
+
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
 
-//        Intent innerIntent = new Intent(this, InnerService.class);
-//        startService(innerIntent);
-        startForeground(SERVICE_ID, new Notification());
-    }
 
-    public static class InnerService extends Service {
-
+    private IBinder mIBinder = new IMyAidlInterface.Stub() {
         @Override
-        public int onStartCommand(Intent intent, int flags, int startId) {
-            startForeground(SERVICE_ID, new Notification());
-            stopForeground(true);
-            stopSelf();
-            return super.onStartCommand(intent, flags, startId);
+        public void addTestBean(TestBean bean) throws RemoteException {
+            mList.add(bean);
         }
 
-        @Nullable
         @Override
-        public IBinder onBind(Intent intent) {
-            return null;
+        public List<TestBean> getList() throws RemoteException {
+            return mList;
         }
-    }
+    };
 }

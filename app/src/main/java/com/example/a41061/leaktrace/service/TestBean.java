@@ -12,8 +12,15 @@ import android.os.Parcelable;
 public class TestBean implements Parcelable {
 
 
+    private String name;
 
     protected TestBean(Parcel in) {
+        name = in.readString();
+    }
+
+
+    public TestBean(String name) {
+        this.name = name;
     }
 
     public static final Creator<TestBean> CREATOR = new Creator<TestBean>() {
@@ -35,6 +42,6 @@ public class TestBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(name);
     }
 }

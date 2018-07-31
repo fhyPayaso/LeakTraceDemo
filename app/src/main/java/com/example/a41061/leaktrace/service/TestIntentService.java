@@ -11,6 +11,8 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
+import java.util.List;
+
 /**
  * @author FanHongyu.
  * @since 18/6/14 20:33.
@@ -21,6 +23,8 @@ public class TestIntentService extends IntentService{
 
     public TestIntentService(String name) {
         super(name);
+
+
     }
 
     @Override

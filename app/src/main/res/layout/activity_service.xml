@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <TextView
+        android:id="@+id/txt_aidl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btn_start"
@@ -25,6 +29,15 @@
         app:lottie_fileName="wow.json"
         app:lottie_loop="true"
         app:lottie_autoPlay="true" />
+
+
+
+    <ImageView
+        android:id="@+id/img_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/leak_canary_icon"
+        android:layout_gravity="center_horizontal"/>
 
 
 

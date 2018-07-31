@@ -42,10 +42,11 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
         <service android:name=".test.MyService"/>
-        <service android:name=".service.TestService"/>
-        <service android:name=".service.TestIntentService"/>
-        <service android:name=".service.TestService$GrayInnerService"/>
-        <service android:name=".service.TestService$InnerService"/>
+        <service
+            android:name=".service.TestService"
+            android:process=":aidl"/>
+
+
         <!-- 声明SDK所需的receiver -->
         <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
             <intent-filter>
@@ -134,5 +135,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".sql.SqlActivity"/>
+        <activity android:name=".service.AnimActivity"/>
     </application>
 </manifest>
