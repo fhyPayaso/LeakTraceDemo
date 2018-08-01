@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -86,6 +87,12 @@ public class ServiceActivity extends AppCompatActivity {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(scaleX).with(scaleY);
         animatorSet.start();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
 }

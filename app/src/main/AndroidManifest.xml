@@ -18,6 +18,9 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
 
 
     <application
@@ -129,12 +132,24 @@
         </activity>
         <activity android:name=".service.ServiceActivity">
 
+        </activity>
+        <activity android:name=".sql.SqlActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+
             </intent-filter>
+
         </activity>
-        <activity android:name=".sql.SqlActivity"/>
-        <activity android:name=".service.AnimActivity"/>
+        <activity android:name=".service.AnimActivity">
+        </activity>
+
+        <provider
+            android:authorities="com.example.a41061.leaktrace.sql.MyContentProvider"
+            android:name=".sql.MyContentProvider"
+            android:exported="false"/>
+
+
     </application>
 </manifest>

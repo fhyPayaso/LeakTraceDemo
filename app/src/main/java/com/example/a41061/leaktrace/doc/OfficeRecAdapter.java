@@ -30,6 +30,7 @@ public class OfficeRecAdapter extends RecyclerView.Adapter<OfficeRecAdapter.Item
         mOfficeModelList = officeModelList;
         mContext = context;
         mInflater = LayoutInflater.from(context);
+
     }
 
 
