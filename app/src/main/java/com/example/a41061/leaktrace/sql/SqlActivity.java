@@ -17,6 +17,10 @@ import android.widget.TextView;
 import com.example.a41061.leaktrace.R;
 import com.example.a41061.leaktrace.until.ToastUtil;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -125,6 +129,7 @@ public class SqlActivity extends AppCompatActivity {
         contentValues.put("name", "123123123123123123");
         mSQLiteDatabase.update(SQLiteDbHelper.TABLE_NAME, contentValues, "id = ?", new String[]{"4"});
         ToastUtil.showToast("更新完成");
+
     }
 
 
@@ -155,6 +160,13 @@ public class SqlActivity extends AppCompatActivity {
         cursor.close();
 
         txtPhone.setText(stringBuilder.toString());
+
+        List<String> list = new LinkedList<>();
+
+        list = new ArrayList<>();
+
+
+
     }
 
 

@@ -32,6 +32,7 @@ public class TestService extends Service {
 
         return mIBinder;
 
+
     }
 
 
@@ -47,4 +48,10 @@ public class TestService extends Service {
             return mList;
         }
     };
+
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
+    }
 }
