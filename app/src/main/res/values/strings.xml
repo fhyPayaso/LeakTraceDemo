@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LeakTrace</string>
+    <string name="title_scaffold">Module Title</string>
 </resources>

@@ -9,7 +9,7 @@ def buildVersions = [
 ext.buildVersions = buildVersions
 
 def buildLib = [
-        gradle : "com.android.tools.build:gradle:$buildVersions.gradle",
+        gradle      : "com.android.tools.build:gradle:$buildVersions.gradle",
         kotlinGradle: "org.jetbrains.kotlin:kotlin-gradle-plugin:$buildVersions.kotlin",
         kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$buildVersions.kotlin",
 ]
@@ -19,6 +19,7 @@ ext.buildLib = buildLib
 def deps = [:]
 def depsVersions = [
         support: "28.0.0",
+        paging : "1.0.0"
 ]
 
 def android = [
@@ -26,6 +27,7 @@ def android = [
         v7          : "com.android.support:appcompat-v7:$depsVersions.support",
         recyclerview: "com.android.support:recyclerview-v7:$depsVersions.support",
         design      : "com.android.support:design:$depsVersions.support",
+        paging      : "android.arch.paging:runtime:$depsVersions.paging",
 ]
 deps.android = android
 
