@@ -19,7 +19,8 @@ ext.buildLib = buildLib
 def deps = [:]
 def depsVersions = [
         support: "28.0.0",
-        paging : "1.0.0"
+        paging : "1.0.0",
+        dagger : "2.17"
 ]
 
 def android = [
@@ -32,7 +33,14 @@ def android = [
 deps.android = android
 
 
-
+def dagger = [
+        dagger                  : "com.google.dagger:dagger:$depsVersions.dagger",
+        dagger_android          : "com.google.dagger:dagger-android:$depsVersions.dagger",
+        dagger_android_support  : "com.google.dagger:dagger-android-support:$depsVersions.dagger",
+        dagger_compiler         : "com.google.dagger:dagger-compiler:$depsVersions.dagger",
+        dagger_android_processor: "com.google.dagger:dagger-android-processor:$depsVersions.dagger"
+]
+deps.dagger = dagger
 
 
 ext.deps = deps

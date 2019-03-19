@@ -39,4 +39,8 @@ dependencies {
     implementation deps.android.v7
     implementation deps.android.design
 
+    implementation "com.squareup.okhttp3:okhttp:3.14.0"
+
+    implementation deps.dagger.dagger
+    annotationProcessor deps.dagger.dagger_compiler
 }

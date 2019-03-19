@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.bytedance.fanhongyu.leaktrace.R
+import com.bytedance.fanhongyu.leaktrace.R.id.txt_module_name
 
 /**
  *

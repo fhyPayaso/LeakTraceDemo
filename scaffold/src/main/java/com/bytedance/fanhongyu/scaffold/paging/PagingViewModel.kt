@@ -38,7 +38,7 @@ abstract class PagingViewModel<T> : ViewModel() {
 
     }
 
-    private fun buildPagedList() = LivePagedListBuilder(mFactory,getConfig()).setBoundaryCallback(PagedList.BoundaryCallback()).build()
+//    private fun buildPagedList() = LivePagedListBuilder(mFactory,getConfig()).setBoundaryCallback(PagedList.BoundaryCallback()).build()
 
 
     protected abstract fun getDataSource(): PagingDataSource<T>

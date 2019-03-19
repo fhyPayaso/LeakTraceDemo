@@ -3,8 +3,19 @@ buildscript {
     ext.kotlin_version = '1.3.21'
     apply from: "config.gradle"
     repositories {
-        addRepos(repositories)
+//        addRepos(repositories)
         mavenCentral()
+        google()
+        jcenter()
+
+
+        maven {
+            url 'https://maven.byted.org/nexus/content/repositories/ugc_android/'
+        }
+        maven {
+            url 'https://maven.byted.org/nexus/content/repositories/ugc_android_snapshot/'
+        }
+
     }
     dependencies {
         classpath buildLib.gradle
@@ -14,9 +25,19 @@ buildscript {
 }
 
 allprojects {
-    addRepos(repositories)
-}
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
 
+        maven {
+            url 'https://maven.byted.org/nexus/content/repositories/ugc_android/'
+        }
+        maven {
+            url 'https://maven.byted.org/nexus/content/repositories/ugc_android_snapshot/'
+        }
+    }
+}
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion buildVersions.compileSdk
 
@@ -44,6 +46,10 @@ dependencies {
     implementation deps.android.v7
     implementation deps.android.design
     implementation deps.android.paging
+
+    implementation deps.dagger.dagger
+    kapt deps.dagger.dagger_compiler
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 

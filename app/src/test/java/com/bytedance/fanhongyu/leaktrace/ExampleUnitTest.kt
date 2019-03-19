@@ -1,5 +1,6 @@
 package com.bytedance.fanhongyu.leaktrace
 
+import com.bytedance.fanhongyu.leaktrace.dagger.DaggerB
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,5 +14,13 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+
+    @Test
+    fun isCorrect() {
+
+        DaggerB().okHttp()
+
     }
 }
