@@ -1,7 +1,6 @@
 package com.bytedance.fanhongyu.leaktrace.test;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -15,7 +14,6 @@ import android.text.style.ReplacementSpan;
 import android.util.TypedValue;
 import android.widget.TextView;
 import com.bytedance.fanhongyu.leaktrace.R;
-import com.bytedance.fanhongyu.leaktrace.widget.TestSpan;
 
 
 /**
@@ -41,51 +39,9 @@ public class TestActivity extends AppCompatActivity {
         text1.setText(builder.toString());
 
 
-
-//        showText(text1, addTailSpan());
-//        showText2(text2, addRoundSpan());
-//        showText(text3, addRoundSpan());
-//        showText(text3, addTestSpan());
     }
 
-//
-//    private TailSpan addTailSpan() {
-//        return new TailSpan(
-//                this,
-//                R.drawable.icon_karaoke_play_whole,
-//                getResColor(this, R.color.bg_video_detail_desc_tail),
-//                (int) dip2Px(this, 4));
-//    }
-//
-//
-//    private RoundIconSpan addRoundSpan() {
-//        final int padding = 4;
-//        final int iconSize = 16;
-//        RoundIconSpan.Builder builder = new RoundIconSpan.Builder();
-//        builder.setBackgroud(getResDrawable(this, R.drawable.bg_span))
-//                .setIcon(getResDrawable(this, R.drawable.icon_karaoke_play_whole))
-//                .setPaddingLeft((int) dip2Px(this, padding))
-//                .setPaddingRight((int) dip2Px(this, padding))
-//                .setIconHeight((int) dip2Px(this, iconSize))
-//                .setIconWidth((int) dip2Px(this, iconSize));
-//        return builder.build();
-//    }
 
-
-    private TestSpan addTestSpan() {
-        final int padding = 4;
-        final int iconSize = 16;
-        TestSpan.Builder builder = new TestSpan.Builder(this);
-        builder.setBackground(R.drawable.bg_span)
-                .setIcon(R.drawable.icon_karaoke_play_whole)
-                .setIHeight(iconSize)
-                .setIWidth(iconSize)
-                .setPLeft(2)
-                .setPRight(4)
-                .setPBottom(3)
-                .setPTop(3);
-        return builder.build();
-    }
 
 
     private void showText(TextView textView, ReplacementSpan span) {
