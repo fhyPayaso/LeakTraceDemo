@@ -10,21 +10,21 @@ import javax.inject.Inject;
  */
 public class DaggerB {
 
-    @Inject
-    DaggerA daggerA;
-
-    @Inject
-    OkHttpClient client;
+//    @Inject
+//    DaggerA daggerA;
+//
+//    @Inject
+//    OkHttpClient client;
 
     public DaggerB() {
-        DaggerBComponent.builder().build().inject(this);
+//        DaggerBComponent.builder().build().inject(this);
     }
 
     public void daggerB() {
-        daggerA.daggerA();
+//        daggerA.daggerA();
     }
 
     public void okHttp() {
-        System.out.println(client == null);
+//        System.out.println(client == null);
     }
 }

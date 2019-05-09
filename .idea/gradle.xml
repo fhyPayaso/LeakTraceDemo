@@ -9,6 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/comone" />
+            <option value="$PROJECT_DIR$/comoneapi" />
+            <option value="$PROJECT_DIR$/comtwo" />
+            <option value="$PROJECT_DIR$/comtwoapi" />
+            <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/scaffold" />
           </set>
         </option>

@@ -1,6 +1,7 @@
 package com.bytedance.fanhongyu.leaktrace
 
 import com.bytedance.fanhongyu.leaktrace.dagger.DaggerB
+import com.bytedance.fanhongyu.leaktrace.kotlin.TestKT
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -20,7 +21,13 @@ class ExampleUnitTest {
     @Test
     fun isCorrect() {
 
-        DaggerB().okHttp()
+        val kt = TestKT()
+
+//        kt.runt()
+
+        kt.run {
+            this.runt()
+        }
 
     }
 }

@@ -27,20 +27,21 @@ public class TestActivity extends AppCompatActivity {
 
     private TextView text1;
 
-    private TextView text2;
-
-    private TextView text3;
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        text1 = findViewById(R.id.txt_test1);
-        text2 = findViewById(R.id.txt_test2);
-        text3 = findViewById(R.id.txt_test3);
+        text1 = findViewById(R.id.text_scroll);
 
-        text1.setTextColor(Color.parseColor("#FFFFFF"));
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < 1000; i++) {
+            builder.append("testtesttestsssssss\n");
+        }
+        text1.setText(builder.toString());
+
+
+
 //        showText(text1, addTailSpan());
 //        showText2(text2, addRoundSpan());
 //        showText(text3, addRoundSpan());

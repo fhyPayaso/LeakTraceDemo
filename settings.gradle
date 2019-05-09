@@ -1,1 +1,1 @@
-include ':app', ':scaffold'
+include ':app', ':scaffold', ':comone', ':comoneapi', ':comtwo', ':comtwoapi', ':core'

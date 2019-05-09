@@ -4,6 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LeakTraceDemo.iml" filepath="$PROJECT_DIR$/LeakTraceDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comone/comone.iml" filepath="$PROJECT_DIR$/comone/comone.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comoneapi/comoneapi.iml" filepath="$PROJECT_DIR$/comoneapi/comoneapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comtwo/comtwo.iml" filepath="$PROJECT_DIR$/comtwo/comtwo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comtwoapi/comtwoapi.iml" filepath="$PROJECT_DIR$/comtwoapi/comtwoapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/scaffold/scaffold.iml" filepath="$PROJECT_DIR$/scaffold/scaffold.iml" />
     </modules>
   </component>

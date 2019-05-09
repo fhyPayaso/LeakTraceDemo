@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion buildVersions.compileSdk
     defaultConfig {
@@ -41,6 +43,13 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:3.14.0"
 
+    // 取core依赖的api
+    implementation project(':core')
+
+    // 组件内部对api或core的依赖不会传递到host
+    implementation project(':comone')
+    implementation project(':comtwo')
+
     implementation deps.dagger.dagger
-    annotationProcessor deps.dagger.dagger_compiler
+    kapt deps.dagger.dagger_compiler
 }
